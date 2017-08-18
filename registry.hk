@@ -1,0 +1,120 @@
+				CENTER MULTIPEL LAYER DATABASE
+Wirte before:
+File location in FileSystem:admin$\windows\system.dat//user.dat|admin$\windows\system32\config\
+				default//SAM//Security//Software//System
+***********************************************************************************************
+*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*
+*&|___________________________________________________________________________________________*
+*&|*Name------------------------------------------------------------>key,Description.	      *
+*&|REG_PATH--------------------------------------------------------->PATH.		      *
+*&|+/-/&Key=Value.#T									      *
+*&|+:ADD A ATTRIBUTION.			#S:STRING TYPE.					      *
+*&|-:DEL A ATTRIBUTION.			#D:DWORD TYPE.					      *
+*&|&:CHANGE A ATTRIBUTION.		#B:BINARY TYPE.					      *
+*&|___________________________________________________________________________________________*
+***********************************************************************************************
+==================================================================================================
+Description		REG_PATH				Usage
+--------------------------------------------------------------------------------------------------
+*Hidden .exe		HKEY_CLASSES_ROOT\exefile		+NeverShowExt=NULL.#S
+--------------------------------------------------------------------------------------------------
+*Hidden folderOption	HKEY_CURRENT_USER\Software\Microsoft\	+NoFolderOption=1.#D
+			Windows\CurrentVersion\Policies\
+			Explorer.
+--------------------------------------------------------------------------------------------------
+*Forbid Registry	HKEY_CURRENT_USER\Software\Microsoft\	+DisableRegistryTools=1.#D
+			Windows\CurrentVersion\Policies\		
+			System.					
+--------------------------------------------------------------------------------------------------
+*Start			HKEY_CURRENT_USER\Software\Microsoft\	+ExeFileName.#S
+			Windwos\CurrentVersion\Run
+			..\CurrentVersion\Policies\Explorer\
+			Run
+			..\RunOnce
+			..\RunServicesOnce
+			..\RunOnceEx
+
+			HKEY_LOCAL_MACHINE\Software\Microsoft\
+			Windows\CurrentVersion\Run
+			..\CurrentVersion\Policies\Explorer\
+			Run
+			..\RunOnce
+			..\RunServicesOnce
+			..\RunOnceEx
+			..WindowsNT\CurrentVersion\Winlogon\
+			UserInit
+---------------------------------------------------------------------------------------------------
+*File_type		REG_PATH				USAGE
+ relevence	
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@.TXT			HKEY_CLASSES_ROOT\txtfile\shell\	%Env_variable%\ExeFile.exe %1
+			open\command				'%1' is the parameter.Symblelize 
+			|					the .txt file.
+			HKEY_LOCAL_MACHINE\Software\
+			Classes\txtfile
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*Forbid Executable	HKEY_LOCAL_MACHINE\Software\		又名镜像劫持，只是利用Debugger找不到
+file run.		Microsoft\WindowsNT\CurrentVersion	调试器而报错。其实改一改程序名字可以
+			\Image File Execution Option\		继续运行。			
+								+exeFileName.exe 
+								+Debugger=Anything.#S
+===================================================================================================
+*Forbid Taskmgr		HKEY_CURRENT_USER\Software\		+DisableTaskmgr=1.#D
+			Microsoft\Windows\CurrentVersion
+			\Policies\System			
+===================================================================================================
+*Hidden Driver		HKEY_CURRENT_USER\Software\		+NoDrives=0x04000000.#B
+			Microsoft\Windows\CurrentVersion
+			\Policies\Explorer		
+	*********************************************************************************
+	*NoDrives's value is Binary Number.So it is divided into for area.00 00 00 00	*
+	*and everty region is is a Hexadecimal.						*
+	*Follow is the graph:								*
+	*	00	00	00	00						*
+	*	||	||	||	||						*
+	*	\/	\/	\/	\/						*
+	*      a-h     i-p     q-x     y-z						*
+	*如果隐藏某个盘，在以上分组中找到盘符。算出盘符在本区内的偏移量。那么，2 的 偏移*
+	*量次方，就代表该区的数值。对于多个需要隐藏的盘符，只要分别计算，然后相加。	*
+	*										*
+	*********************************************************************************
+==================================================================================================
+*Change browser			HKEY_CURRENT_USER\Software\Microsoft	&start Page
+start page.			\internet explorer\main			
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*Forbid change			HKEY_CURRENT_USER\Software\Polices\
+start page.			\internet explorer\control panel	+homepage=1.#D
+===================================================================================================
+*Change net			HKEY_LOCAL_MACHINE\system\		&databasePath.#M
+config file position.		CurrentControlSet\Service\
+				Tcpip\Parameter\:databasePath.
+==================================================================================================
+*SPI (Service Provider		HKEY_LOCAL_MACHINE\system\		^
+Interface).			CurrentControlSet\Service\
+				WinSock2\Parameters\protocol_
+				catalog9\catalog_entries
+===================================================================================================
+*BHO				HKEY_LOCAL_MACHINE\Software\
+				Microsoft\Windows\CurrentVersion
+				Exploer\Browser Helper Object
+===================================================================================================
+*userinit			HKEY_LOCAL_MACHINE\Software\		&exeFile.exe
+				Microsoft\Windows NT\
+				CurrentVersion\Winlogon		
+===================================================================================================
+*Internet Advanced		HKEY_LOCAL_MACHINE\Software\
+Option.				Microsoft\Internet Explorer\
+				AdvancedOption
+===================================================================================================
+*URL prefixs			HKEY_LOCLA_MACHINE\Software\
+				Micorsoft\Windows\CurrentVersion\
+				URL\DefaultPrefixs.	
+==================================================================================================
+*Trust Region			HKEY_CURRENT_USER\Software\
+				Microsoft\Windows\CurrentVersion\
+				Internet Settings\----->
+				ZoneMap\domains
+				ZoneMap\Ranges
+				Zones\
+===================================================================================================
+

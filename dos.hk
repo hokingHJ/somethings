@@ -1,0 +1,287 @@
+#arp 地址解析.
+语法：
+	arp -a [inetAddr] [-N ifaceAddr]	: -a 显示所有网卡的arp缓冲记录.ifacdAddr 接口地址，也就是所谓的ip
+	arp -s InetAddr EtherAddr 		:将IP与物理地址(MAC)绑定.
+	arp -d InetADdr [IfaceAddr]		:删除arp缓冲中指定的项.*--全部.
+	arp -v ...				: -v verbose 冗余模式,以详尽的方式显示所有记录.
+注意：
+	此命令经常与ping 命令配合使用，用以向缓冲中填充记录.
+#getmac 获得MAC地址
+语法:
+	getmac /s computer[IP] [/u Domain \user] [/p password] [/fo {TABLE|LIST|CSV}] [/v]
+		:/s	指定计算机名称或IP
+		:/u	以user 或者 Domain \user 的身份运行命令.
+		:/p	指定身份的密码
+		:/fo	指定输出的格式
+		:/v	冗余模式
+		:/nh	输出时压缩表头.
+注意:
+	以上默认的参数都是只本机.
+*gettype
+#hostname
+	说明:获取主机名称.这样可以使用 \\HOSTNAME 访问网络中计算机.
+注意:	当然只有当计算机中安装了TCP/IP协议后，才可以以此名称来访问.
+#ipconfig 显示当前所有TCP/IP 网络配置，刷新DHCP 和 DNS 设置。
+语法:
+	ipconfig [/all] [/renew [Adapter]] [/release[Adapter]] [/flushdns] [/dsplaydns] [/registerdns] [/showclassidAdapter] [/setclassidAdapter[ClassID]]
+	/all	:显示所有网卡的tcp/ip完整配置信息。默认只显示各个网卡IPv4,IPv6,掩码，网关。
+	/renew Adapter:	更新所有网卡或特定网卡的dhcp配置。
+	/release Adapter:发送DHCPRELEASE 到DHCP服务器，已释放所有网卡，或特定DHCP配置。
+	/flushdns :刷新dns客户端解析缓冲。
+	/displaydns
+	/showclassid Adapter
+	/setclassid Adapter
+#nbtstat 显示NetBios 配置
+	nbtstat [-a RemoteComputerName] [-A IP] [-c] [-r] [-n] [-R] [-RR] [-s] [-S] [interval]
+	-a :
+	-A :
+	-n : display local computer's BIOS table.
+#netstat 显示网络状态
+	option:
+		-a:all tcp/udp port.
+		-b:display relational application.
+		-e:diaplay the EtherNet statistics information.Inlcude the bytes of sending and receving.
+		-f:Display outside addr.
+		-n:Display the prots has build valid connection.
+		-o:Show PID
+		-p protocol:show indicate protocol.
+		-r:show route table.
+		-s:show statistics infomation.
+		-t:Display uninstall state of current connection.
+#ping ip连接测试
+	option:
+		-t:Sending data no interruption.
+		-a:Parse IP to hostname.
+		-c:the counts of response.
+		-l size:Data size
+#nslookup 管理dns服务
+	help;
+# tracert 检查路由。
+#netsh 管理网络配置。
+	*用法在帮助信息中。
+#net 网路综合命令
+	subcommand:
+		net accounts,net computer,net config.net continue.net file.net group.
+		net help.net use. net session.net share.net start.net statistics.net stop.
+		net time.net view.net localgroup.
+	
+#comkey 管理网络凭据
+#prompt 命令提示符格式设置。
+	Usage:prompt text.
+	option:
+		$p$g: 默认状态
+		$q : '='
+		$$ : '$'
+		$t : current time 
+		$d : current date
+		$p : current driver's complete path.
+		$v : windowns version.
+		$n : current dirver's name.
+		$g : '>'
+		$l : '<'
+		$b : '|' pipe
+		$_ : 'ENTER'
+		$h : backspace.
+		$a : '&'
+		$c : '('
+		$F : ')'
+		$s : space.
+#title 
+	Interpretation: change the title of the windown.
+	Usage: title [string]
+#set 
+	Interpretation: Display,sets or removes cmd.exe environment variables.
+	Usage:	set Environment Variable = [string] /a /p
+	Option:
+		The /A switch specifies that the string to the right of the equal sign is a 
+		numrical expression that is evaluated.
+		The /P switch allows you to set the value of a variable to a line input entered by
+		user.
+#dir
+	Interpretation: list all files and folders under current node folder except hidden or 
+	system type file/folder.
+	Usage: dir driver:\filepath\ /p /w /s /a:[h][s][d][-d][r][-r] /o:[n][d][s][g] /q/c/-c
+	====================================================================================
+		Option:
+			/p : 分屏显示
+			/w : 每行显示5个文件名和扩展名
+			/s : 递归列出各级子目录的所有文件.
+			/a : 显示具有指定属性的文件或目录.
+				h: hidden 
+				s: system
+				d: directory
+			       -d: except directory
+			        r: read only.
+			       -r：except read only file.
+			/o : 排序方式
+				n: order by name.
+				d: order by date and time.
+				s: order by size of file.
+				g: order by default way.(first dir last file)
+			/q: 显示文件所有者.
+			/c: 在文件大小中显示千位分隔符.
+			/-c:停用分隔符.
+#md
+		Illistration：创建目录
+		Note:	可以同时创建多级目录而无需加参数。
+#rd
+		Interpretation:删除目录
+		Option:
+			/s : 删除子目录中所有文件.
+			/q : quiet.no tips.
+		Note:  	不带参数时，只能删除空的目录，如果目录不为空，则无法删除。
+#move		
+		Usage : move sourcefile destinationfile.
+#path
+		Intrpretation: 显示path环境变量.
+		Usage：
+			path [driver:][path]
+		Note: 此命令不仅可以显示当前path变量，而且可以设置。只是只在当前session有效.
+#copy
+		Usage: NO.1 copy source a/b destination 
+		       NO.2 copy source1 + source2 + [...] destination.
+		       NO.3 copy con filename
+		Option:
+			/a: ASCII file.
+			/b: binary file.
+			/v: with check
+			/y: no tips for override.
+			/-y:with tips for override.
+		Example:
+			copy a*.txt c:\users\admin copy one more file to destionation file.
+			copy file1.txt+file2+file3 c:\users\admin -- concatnate multiple file.
+			copy file1.jpg /b + file2.txt /a file3.jpg -- hidden a .txt file in 
+			a picture.
+			copy file.txt + ,,   -- update the timestamp to now.
+#xcopy
+		
+#ren
+		function:rename a file name.
+#more
+		example: type file.txt | more  -- 分屏显示文件内容.
+			more file.txt
+
+#attrib
+		Function:查看、修改文件的属性.
+		Usage:
+			attrib [driver:][path][filename] [parameters]
+		Option:
+			+ : add  attribution to specific file.
+			- : remove attribution.
+			r : read only attribution.
+			h : hidden
+			s : system
+			a : archieve
+			/s: diaplay all attirbution under the whole directionary.
+#fc
+		Function: 文件比较.
+#find
+		Function:在文本文件中查找指定的字符串.
+		Usage:
+			find <"string"> [driver:][path][filename.txt] /c /v /i /n
+		Option:
+			/v: Show all lines without the specific string.
+			/c：Only show counts of all lines include the indicated string.
+			/n: Show line number.
+			/i：No case sensitive.
+#date
+#time
+#ver
+		Meaning: Print the system version.
+#vol
+		Function:Show the sequence number of the driver's volume.
+#lable
+		Function:change label of the disk's volume.
+		Usage:
+			label driver: label
+		Example: label c: honey
+#subst
+		Function:用特定的路径来替代指定的路径.
+		Usage:
+			subst virtualDriver driver:\path\ -- bind a specific path to a virtual path.
+			subst virtualDriver /d -- release the bind.
+		Note:
+			It can work only under cmd windows rather than powerShell.
+#debug
+		Declare: Maybe it has been remove from the windowns desktop version.But I think
+		it is rally a very power tool.
+#chkdsk
+		Function: Check and repair the disk error.
+#gpresult 
+		Function:Display target user and computer's RSoP(result set of policy)
+		Usage:gpresult /s system /u username [/p password] /scope SCOPE /v /z /r
+#hdwwiz.exe
+		Description:添加硬件向导程序.
+		Distinguish: hdwwiz.cpl is similary with devmgmt.msc.Both of them pop up the same
+		windows.
+#chkdsk
+		Description: check the disk and display the result reports.
+#chkntfs
+		Desc: Show or change the chkdsk when system is started.
+#cipher
+		Desc:Display or change the directory/file 's encryption in NTFS partition.
+#colorcpl
+		Desc:Microsoft color control panel.
+#comexp.msc	
+		Desc:Microsoft Universal Managerment Document.
+		Event: pop up a MMC console.
+#comp
+		Desc:Compare two files or file sets.
+#compact
+		Desc:Display or change the file's compression in NTFS partition.
+#computerDefaults
+		Desc:Setup the computer default application.
+#convert 
+		Desc:Convert the volume's formation from FAT to NTFS.
+#credwiz
+		DESC:Proof backup and restore wizard.凭据备份和还原向导。
+#cscript
+		Desc:Microsoft Windows Script Host Version.脚本执行程序。
+		Usage:CScrpipt scriptname.extension [option] [arguments...]
+#ctfmon
+		Desc:CTF load application.About keyboard input.CTF 加载程序。
+#dccw
+		Desc:Double Color calibration.双色校准.
+#DevicePairingWizard
+		Desc:Devices pairing wizard.设备配对引导程序。
+#devmgmt.msc
+		Desc:Devices manager.设备管理器。
+#dfrgui
+		Desc:Drvier fragment UI Application.驱动器碎片图形界面程序。
+#dialer
+		Desc:Dialing for accessing to Internet.电话拨号程序.
+#diskpart
+#diskmgmt.msc
+#diskpref
+#diskraid 
+		Desc:unknown.
+#dism
+		Desc:Configure image services and management tool.
+#doskey 
+		Desc:Keyboard history record utility tool.
+#dpiscaling
+		Desc:Pop up control panel with  windows 10 stytle.
+#driverquery
+		Desc:Allow the administrator browse the driver application installed.
+#DxCap
+		Desc:Capture and replay of Direct3D rendering.
+#DXCpl
+#dxdiag
+#eudcedit	
+		Desc:Professional character editor.
+#eventcreate
+		Desc:Allow the Administrator create self-define event.
+#eventvwr.exe/eventvwr.msc
+		Desc:Event viewer.事件查看器。
+#evntwin
+#evntcmd	DESC:事件转换陷阱的转换工具。
+#findstr
+		Desc:Look up string in file.
+#fsmgmt
+		Desc:Share Folder.
+#main.cpl	
+		Desc:Mouse setup.
+#taskkill
+		Desc:Kill a processes according to the PID.
+#tasklist
+		Desc:list processes.
